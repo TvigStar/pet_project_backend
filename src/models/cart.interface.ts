@@ -1,0 +1,18 @@
+import { CartStatusEnum } from '../constants';
+import { Types } from 'mongoose';
+
+export interface ICartProduct {
+  productId: Types.ObjectId;
+  count: number;
+  price: number;
+}
+
+export interface ICart {
+  _id: Types.ObjectId;
+  products: [ICartProduct];
+  userId: Types.ObjectId;
+  status: CartStatusEnum
+  sum: number;
+  createdAt: string;
+  updatedAt: string;
+}
