@@ -14,7 +14,7 @@ exports.UserSchema = new mongoose_1.Schema({
     },
     surname: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
@@ -27,11 +27,11 @@ exports.UserSchema = new mongoose_1.Schema({
     },
     age: {
         type: Number,
-        required: true
+        required: false
     },
     phone: {
         type: String,
-        required: true
+        required: false
     },
     gender: {
         type: String,

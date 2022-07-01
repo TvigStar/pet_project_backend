@@ -5,6 +5,9 @@ declare class AuthService {
         accessToken?: string;
         refreshToken?: string;
     }): Promise<IUser | null>;
+    findRefreshToken(findObject: {
+        refreshToken?: string;
+    }): Promise<IAccessToken>;
     removeToken(removeObject: {
         accessToken?: string;
         refreshToken?: string;

@@ -10,7 +10,7 @@ import { checkForgotPassTokenMiddleware } from '../../middlewares';
 
 const router = Router();
 
-router.post('/', checkIsUserValidMiddleware, checkIsEmailExistMiddleware, userController.createUser);
+router.post('/register', checkIsUserValidMiddleware, checkIsEmailExistMiddleware, userController.createUser);
 router.post('/confirm', checkConfirmTokenMiddleware, userController.confirmUser);
 router.post('/password/forgot',
   emailValidatorMiddleware,

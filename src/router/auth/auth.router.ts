@@ -14,6 +14,8 @@ router.post('/signin',
   checkIsUserConfirmedMiddleware,
   authController.authUser);
 
+router.post('/refresh', authController.refreshToken);
+
 router.post('/logout', checkAccessTokenMiddleware, authController.logoutUser);
 
 export const authRouter = router;
