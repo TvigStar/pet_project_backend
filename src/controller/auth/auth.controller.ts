@@ -1,7 +1,4 @@
-import {
-  IAccessToken, IRequestExtended, IUser
-  // IUserToken
-} from '../../models';
+import { IRequestExtended, IUser } from '../../models';
 import { NextFunction, Request, Response } from 'express';
 import { comparePassword, tokenizer, tokenVerification } from '../../helpers';
 import { ActionEnum, RequestHeadersEnum, ResponseStatusCodesEnum } from '../../constants';
@@ -41,22 +38,27 @@ class AuthController {
       const {refreshToken} = req.body;
 
       if (!refreshToken){
-        return next(new ErrorHandler(ResponseStatusCodesEnum.NOT_FOUND, customErrors.BAD_REQUEST_NO_TOKEN.message ));
+        return next(new ErrorHandler(ResponseStatusCodesEnum.NOT_FOUND, customErrors.BAD_REQUEST_NO_TOKEN.message));
       }
 
-      await tokenVerification(ActionEnum.USER_REGISTER, refreshToken);
+      const token = await authService.findRefreshToken(refreshToken);
 
-      const tokenValid = await authService.findRefreshToken(refreshToken);
+      const isTokenValid = await tokenVerification(ActionEnum.USER_REFRESH, refreshToken);
+
+      await authService.removeToken({refreshToken});
+
+      if (!isTokenValid) {
+        return next(new ErrorHandler(ResponseStatusCodesEnum.UNAUTHORIZED, customErrors.UNAUTHORIZED_BAD_TOKEN.message));
+      }
 
       const {access_token, refresh_token} = tokenizer(ActionEnum.USER_AUTH);
 
-      if (tokenValid){
-        await authService.createTokenPair({
-          accessToken: access_token,
-          refreshToken: refresh_token,
-          // userId: _id
-        });
-      }
+      await authService.createTokenPair({
+        accessToken: access_token,
+        refreshToken: refresh_token,
+        userId: token.userId
+      });
+
       res.json({access_token, refresh_token});
     } catch (err){
       return next(err);

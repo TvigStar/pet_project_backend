@@ -12,6 +12,10 @@ export const tokenVerification = async (action: ActionEnum, token: string): Prom
         isValid = await verify(token, config.JWT_SECRET) as Promise<VerifyErrors | null>;
         break;
 
+      case ActionEnum.USER_REFRESH:
+        isValid = await verify(token, config.JWT_REFRESH_SECRET) as Promise<VerifyErrors | null>;
+        break;
+
       case ActionEnum.USER_REGISTER:
         isValid = await verify(token, config.JWT_CONFIRM_EMAIL_SECRET) as Promise<VerifyErrors | null>;
         break;
