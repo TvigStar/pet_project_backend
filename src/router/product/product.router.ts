@@ -5,6 +5,6 @@ import { newProductValidatorMiddleware } from '../../middlewares';
 
 const router = Router();
 
-router.post('/', checkAccessTokenMiddleware,newProductValidatorMiddleware , productController.createProduct);
+router.post('/create', checkAccessTokenMiddleware,newProductValidatorMiddleware , productController.createProduct);
 
 export const productRouter = router;
