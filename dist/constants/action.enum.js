@@ -4,6 +4,7 @@ exports.ActionEnum = void 0;
 var ActionEnum;
 (function (ActionEnum) {
     ActionEnum["USER_AUTH"] = "user_auth";
+    ActionEnum["USER_REFRESH"] = "user_refresh";
     ActionEnum["USER_REGISTER"] = "user_register";
     ActionEnum["FORGOT_PASSWORD"] = "forgot_password";
 })(ActionEnum = exports.ActionEnum || (exports.ActionEnum = {}));

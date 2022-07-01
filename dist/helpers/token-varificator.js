@@ -46,33 +46,38 @@ var tokenVerification = function (action, token) { return __awaiter(void 0, void
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 9, , 10]);
+                _b.trys.push([0, 11, , 12]);
                 isValid = void 0;
                 _a = action;
                 switch (_a) {
                     case constants_1.ActionEnum.USER_AUTH: return [3, 1];
-                    case constants_1.ActionEnum.USER_REGISTER: return [3, 3];
-                    case constants_1.ActionEnum.FORGOT_PASSWORD: return [3, 5];
+                    case constants_1.ActionEnum.USER_REFRESH: return [3, 3];
+                    case constants_1.ActionEnum.USER_REGISTER: return [3, 5];
+                    case constants_1.ActionEnum.FORGOT_PASSWORD: return [3, 7];
                 }
-                return [3, 7];
+                return [3, 9];
             case 1: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_SECRET)];
             case 2:
                 isValid = (_b.sent());
-                return [3, 8];
-            case 3: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_CONFIRM_EMAIL_SECRET)];
+                return [3, 10];
+            case 3: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_REFRESH_SECRET)];
             case 4:
                 isValid = (_b.sent());
-                return [3, 8];
-            case 5: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_PASS_RESET_SECRET)];
+                return [3, 10];
+            case 5: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_CONFIRM_EMAIL_SECRET)];
             case 6:
                 isValid = (_b.sent());
-                return [3, 8];
-            case 7: throw new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.SERVER, 'wrong Action type');
-            case 8: return [2, isValid];
-            case 9:
+                return [3, 10];
+            case 7: return [4, (0, jsonwebtoken_1.verify)(token, config_1.config.JWT_PASS_RESET_SECRET)];
+            case 8:
+                isValid = (_b.sent());
+                return [3, 10];
+            case 9: throw new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.SERVER, 'wrong Action type');
+            case 10: return [2, isValid];
+            case 11:
                 e_1 = _b.sent();
                 throw new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.UNAUTHORIZED, errors_1.customErrors.UNAUTHORIZED_BAD_TOKEN.message);
-            case 10: return [2];
+            case 12: return [2];
         }
     });
 }); };

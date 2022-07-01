@@ -5,9 +5,7 @@ declare class AuthService {
         accessToken?: string;
         refreshToken?: string;
     }): Promise<IUser | null>;
-    findRefreshToken(findObject: {
-        refreshToken?: string;
-    }): Promise<IAccessToken>;
+    findRefreshToken(refreshToken?: string): Promise<IAccessToken | null>;
     removeToken(removeObject: {
         accessToken?: string;
         refreshToken?: string;

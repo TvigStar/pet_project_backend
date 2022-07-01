@@ -62,12 +62,8 @@ var AuthService = (function () {
             });
         });
     };
-    AuthService.prototype.findRefreshToken = function (findObject) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2];
-            });
-        });
+    AuthService.prototype.findRefreshToken = function (refreshToken) {
+        return database_1.AccessTokenModel.findOne({ refreshToken: refreshToken }).exec();
     };
     AuthService.prototype.removeToken = function (removeObject) {
         return database_1.AccessTokenModel.findOneAndDelete(removeObject).exec();

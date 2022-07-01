@@ -77,6 +77,47 @@ var AuthController = (function () {
             });
         });
     };
+    AuthController.prototype.refreshToken = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var refreshToken, token, isTokenValid, _a, access_token, refresh_token, err_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 5, , 6]);
+                        refreshToken = req.body.refreshToken;
+                        if (!refreshToken) {
+                            return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.NOT_FOUND, errors_1.customErrors.BAD_REQUEST_NO_TOKEN.message))];
+                        }
+                        return [4, services_1.authService.findRefreshToken(refreshToken)];
+                    case 1:
+                        token = _b.sent();
+                        return [4, (0, helpers_1.tokenVerification)(constants_1.ActionEnum.USER_REFRESH, refreshToken)];
+                    case 2:
+                        isTokenValid = _b.sent();
+                        return [4, services_1.authService.removeToken({ refreshToken: refreshToken })];
+                    case 3:
+                        _b.sent();
+                        if (!isTokenValid) {
+                            return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.UNAUTHORIZED, errors_1.customErrors.UNAUTHORIZED_BAD_TOKEN.message))];
+                        }
+                        _a = (0, helpers_1.tokenizer)(constants_1.ActionEnum.USER_AUTH), access_token = _a.access_token, refresh_token = _a.refresh_token;
+                        return [4, services_1.authService.createTokenPair({
+                                accessToken: access_token,
+                                refreshToken: refresh_token,
+                                userId: token.userId
+                            })];
+                    case 4:
+                        _b.sent();
+                        res.json({ access_token: access_token, refresh_token: refresh_token });
+                        return [3, 6];
+                    case 5:
+                        err_2 = _b.sent();
+                        return [2, next(err_2)];
+                    case 6: return [2];
+                }
+            });
+        });
+    };
     AuthController.prototype.logoutUser = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
             var accessToken;
