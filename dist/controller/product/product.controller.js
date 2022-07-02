@@ -83,6 +83,30 @@ var ProductController = (function () {
             });
         });
     };
+    ProductController.prototype.getAllProduct = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var products, allproducts, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        products = req.body;
+                        console.log(req.body);
+                        return [4, services_1.productService.findAllProducts(products)];
+                    case 1:
+                        allproducts = _a.sent();
+                        console.log(allproducts);
+                        res.json([allproducts]);
+                        return [3, 3];
+                    case 2:
+                        err_2 = _a.sent();
+                        next(err_2);
+                        return [3, 3];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     return ProductController;
 }());
 exports.productController = new ProductController();

@@ -1,5 +1,5 @@
 import { IRequestExtended, IUser } from '../../models';
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { logService, productService } from '../../services';
 import { LogsEnum } from '../../constants';
 
@@ -17,6 +17,18 @@ class ProductController {
       });
       res.json(newProduct);
     } catch (err) {
+      next(err);
+    }
+  }
+
+  async getAllProduct(req: Request, res: Response, next: NextFunction){
+    try {
+      const products = req.body;
+      console.log(req.body);
+      const allproducts =await productService.findAllProducts(products);
+      console.log(allproducts);
+      res.json([allproducts]);
+    } catch (err){
       next(err);
     }
   }

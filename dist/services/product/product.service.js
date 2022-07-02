@@ -15,6 +15,9 @@ var ProductService = (function () {
     ProductService.prototype.findProductById = function (productId) {
         return database_1.ProductModel.findById(productId).exec();
     };
+    ProductService.prototype.findAllProducts = function (product) {
+        return database_1.ProductModel.find({});
+    };
     return ProductService;
 }());
 exports.productService = new ProductService();

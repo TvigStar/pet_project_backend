@@ -6,6 +6,7 @@ var controller_1 = require("../../controller");
 var middlewares_1 = require("../../middlewares");
 var middlewares_2 = require("../../middlewares");
 var router = (0, express_1.Router)();
+router.get('/getproduct', controller_1.productController.getAllProduct);
 router.post('/create', middlewares_1.checkAccessTokenMiddleware, middlewares_2.newProductValidatorMiddleware, controller_1.productController.createProduct);
 exports.productRouter = router;
 //# sourceMappingURL=product.router.js.map

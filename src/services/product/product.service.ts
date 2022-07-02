@@ -18,6 +18,10 @@ class ProductService {
     return ProductModel.findById(productId).exec();
   }
 
+  findAllProducts(product: IProduct){
+    return ProductModel.find({});
+  }
+
 }
 
 export const productService = new ProductService();
