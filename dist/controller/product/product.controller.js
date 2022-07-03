@@ -96,7 +96,7 @@ var ProductController = (function () {
                     case 1:
                         allproducts = _a.sent();
                         console.log(allproducts);
-                        res.json([allproducts]);
+                        res.json(allproducts);
                         return [3, 3];
                     case 2:
                         err_2 = _a.sent();
