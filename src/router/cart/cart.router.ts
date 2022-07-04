@@ -10,10 +10,9 @@ const router = Router();
 
 router.use(checkAccessTokenMiddleware, checkIsUserConfirmedMiddleware);
 
-router.get('/proceed', cartController.getUserCart);
+router.get('/', cartController.getUserCart);
 
 router.post('/products/:productId', isProductExistsMiddleware,
-  // addProductToCartValidatorMiddleware,
   cartController.addProductToCart);
 
 export const cartRouter = router;

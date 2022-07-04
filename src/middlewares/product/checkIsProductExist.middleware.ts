@@ -6,7 +6,6 @@ import { ResponseStatusCodesEnum } from '../../constants';
 
 export const isProductExistsMiddleware = async (req: IRequestExtended, res: Response, next: NextFunction): Promise<any> => {
   const {productId} = req.params;
-  console.log(req.params);
   const product = await productService.findProductById(productId);
 
   if (!product) {

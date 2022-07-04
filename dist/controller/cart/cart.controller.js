@@ -62,7 +62,7 @@ var CartController = (function () {
                         if (!!userCart) return [3, 3];
                         return [4, services_1.cartService.createCart({ userId: userId })];
                     case 2:
-                        _a.sent();
+                        userCart = _a.sent();
                         _a.label = 3;
                     case 3: return [4, services_1.cartService.addProductToCart(userCart, product, count)];
                     case 4:

@@ -3,6 +3,7 @@ import { IProduct, IRequestExtended, IUser } from '../../models';
 import { cartService, productService } from '../../services';
 import { customErrors, ErrorHandler } from '../../errors';
 import { ResponseStatusCodesEnum } from '../../constants';
+import { number } from 'joi';
 
 class CartController {
   async addProductToCart(req: IRequestExtended, res: Response, next: NextFunction) {
@@ -18,9 +19,9 @@ class CartController {
         ));
       }
 
-      const userCart = await cartService.findUserProceedCart(userId);
-      if (!userCart){
-        await cartService.createCart({userId});
+      let userCart = await cartService.findUserProceedCart(userId);
+      if (!userCart) {
+        userCart = await cartService.createCart({userId});
       }
 
       const iCart = await cartService.addProductToCart(userCart, product, count);
@@ -43,6 +44,7 @@ class CartController {
     } catch (e) {
       next(e);
     }
-  }}
+  }
+}
 
 export const cartController = new CartController();

@@ -91,11 +91,9 @@ var ProductController = (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         products = req.body;
-                        console.log(req.body);
                         return [4, services_1.productService.findAllProducts(products)];
                     case 1:
                         allproducts = _a.sent();
-                        console.log(allproducts);
                         res.json(allproducts);
                         return [3, 3];
                     case 2:

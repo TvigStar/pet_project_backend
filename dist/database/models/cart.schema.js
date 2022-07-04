@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CartModel = exports.CartSchema = void 0;
 var mongoose_1 = require("mongoose");
 var constants_1 = require("../../constants");
-var productSubModel = {
+var productSubModel = new mongoose_1.Schema({
     productId: {
         type: mongoose_1.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: constants_1.TableNamesEnum.PRODUCTS
     },
     count: {
         type: Number,
@@ -16,7 +17,7 @@ var productSubModel = {
         type: Number,
         required: false
     }
-};
+});
 exports.CartSchema = new mongoose_1.Schema({
     products: [productSubModel],
     userId: {

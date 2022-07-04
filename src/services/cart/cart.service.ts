@@ -11,7 +11,7 @@ class CartService {
     return cartToCreate.save();
   }
 
-  addProductToCart(userCart: ICart, product: IProduct, productCount: number): Promise<ICart | null> {
+  async addProductToCart(userCart: ICart, product: IProduct, productCount: number): Promise<ICart | null> {
     const productIndex = userCart.products.findIndex((value: ICartProduct) => {
       return product._id.toString() === value.productId.toString();
     });
@@ -21,21 +21,25 @@ class CartService {
     } else {
       userCart.products.push({
         count: productCount,
-        productId: product._id,
+        productId: product,
         price: product.price
       });
     }
 
     userCart.sum = calculateCartPrice(userCart.products);
 
-    return this.updateCart(userCart._id, userCart);
+    await this.updateCart(userCart._id, userCart);
+
+    return userCart;
   }
 
   findUserProceedCart(userId: Types.ObjectId): Promise<ICart> {
     return CartModel.findOne({
       status: CartStatusEnum.IN_PROGRESS,
       userId
-    }).exec();
+    })
+      .populate('products.productId')
+      .exec();
   }
 
   updateCart(_id: Types.ObjectId, cartToUpdate: ICart): Promise<ICart | null> {

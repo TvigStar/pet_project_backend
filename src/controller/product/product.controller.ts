@@ -24,9 +24,7 @@ class ProductController {
   async getAllProduct(req: Request, res: Response, next: NextFunction){
     try {
       const products = req.body;
-      console.log(req.body);
       const allproducts =await productService.findAllProducts(products);
-      console.log(allproducts);
       res.json(allproducts);
     } catch (err){
       next(err);

@@ -15,6 +15,6 @@ export interface IUser {
     gender?: string;
     photo?: string;
     status: string;
-    token?: [IUserToken];
+    token?: IUserToken[];
     createdAt: any;
 }

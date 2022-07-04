@@ -46,7 +46,6 @@ var isProductExistsMiddleware = function (req, res, next) { return __awaiter(voi
         switch (_a.label) {
             case 0:
                 productId = req.params.productId;
-                console.log(req.params);
                 return [4, services_1.productService.findProductById(productId)];
             case 1:
                 product = _a.sent();

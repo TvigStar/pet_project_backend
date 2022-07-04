@@ -4,10 +4,11 @@ import { ICart } from '../../models';
 
 export type CartType = ICart & Document
 
-const productSubModel = {
+const productSubModel = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: TableNamesEnum.PRODUCTS
   },
   count: {
     type: Number,
@@ -17,7 +18,7 @@ const productSubModel = {
     type: Number,
     required: false
   }
-};
+});
 
 export const CartSchema: Schema = new Schema<ICart>({
   products: [productSubModel],

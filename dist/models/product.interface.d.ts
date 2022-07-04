@@ -8,9 +8,9 @@ export interface IProduct {
     price: number;
     hasDiscount: boolean;
     oldPrice?: number;
-    tags?: [string];
-    photos?: [string];
-    docs?: [string];
+    tags?: string[];
+    photos?: string[];
+    docs?: string[];
     stockCount: number;
     userId: Types.ObjectId;
     createdAt: any;
