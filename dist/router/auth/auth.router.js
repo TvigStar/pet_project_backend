@@ -7,6 +7,6 @@ var middlewares_1 = require("../../middlewares");
 var router = (0, express_1.Router)();
 router.post('/signin', middlewares_1.emailPasswordValidatorMiddleware, middlewares_1.checkIsUserExistByEmailMiddleware, middlewares_1.checkIsUserConfirmedMiddleware, controller_1.authController.authUser);
 router.post('/refresh', controller_1.authController.refreshToken);
-router.post('/logout', middlewares_1.checkAccessTokenMiddleware, controller_1.authController.logoutUser);
+router.post('/logout', controller_1.authController.logoutUser);
 exports.authRouter = router;
 //# sourceMappingURL=auth.router.js.map

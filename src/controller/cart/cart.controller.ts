@@ -3,7 +3,6 @@ import { IProduct, IRequestExtended, IUser } from '../../models';
 import { cartService, productService } from '../../services';
 import { customErrors, ErrorHandler } from '../../errors';
 import { ResponseStatusCodesEnum } from '../../constants';
-import { number } from 'joi';
 
 class CartController {
   async addProductToCart(req: IRequestExtended, res: Response, next: NextFunction) {

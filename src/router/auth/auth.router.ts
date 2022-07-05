@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { authController } from '../../controller';
 import {
-  checkAccessTokenMiddleware,
   checkIsUserConfirmedMiddleware,
   checkIsUserExistByEmailMiddleware, emailPasswordValidatorMiddleware
 } from '../../middlewares';
@@ -16,6 +15,6 @@ router.post('/signin',
 
 router.post('/refresh', authController.refreshToken);
 
-router.post('/logout', checkAccessTokenMiddleware, authController.logoutUser);
+router.post('/logout', authController.logoutUser);
 
 export const authRouter = router;

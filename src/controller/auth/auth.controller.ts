@@ -66,12 +66,15 @@ class AuthController {
   }
 
   async logoutUser(req: Request, res: Response, next: NextFunction) {
-    const accessToken = req.get(RequestHeadersEnum.AUTHORIZATION);
+    try {
+      const accessToken = req.get(RequestHeadersEnum.AUTHORIZATION);
 
-    await authService.removeToken({accessToken});
+      await authService.removeToken({accessToken});
 
-    res.sendStatus(ResponseStatusCodesEnum.NO_CONTENT);
-
+      res.sendStatus(ResponseStatusCodesEnum.NO_CONTENT);
+    } catch (err){
+      return next(err);
+    }
   }
 }
 

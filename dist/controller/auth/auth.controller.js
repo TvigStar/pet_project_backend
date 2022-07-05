@@ -120,16 +120,21 @@ var AuthController = (function () {
     };
     AuthController.prototype.logoutUser = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var accessToken;
+            var accessToken, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        _a.trys.push([0, 2, , 3]);
                         accessToken = req.get(constants_1.RequestHeadersEnum.AUTHORIZATION);
                         return [4, services_1.authService.removeToken({ accessToken: accessToken })];
                     case 1:
                         _a.sent();
                         res.sendStatus(constants_1.ResponseStatusCodesEnum.NO_CONTENT);
-                        return [2];
+                        return [3, 3];
+                    case 2:
+                        err_3 = _a.sent();
+                        return [2, next(err_3)];
+                    case 3: return [2];
                 }
             });
         });
