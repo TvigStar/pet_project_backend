@@ -7,6 +7,7 @@ var express = require("express");
 var dotenv = require("dotenv");
 var morgan = require("morgan");
 var helmet = require("helmet");
+var fileUpload = require("express-fileupload");
 var path = require("path");
 var mongoose = require("mongoose");
 var config_1 = require("./config");
@@ -22,7 +23,7 @@ var App = (function () {
     function App() {
         this.app = express();
         this.configureCors = function (origin, callback) {
-            var whiteList = config_1.config.ALLOWED_ORIGIN;
+            var whiteList = config_1.config.ALLOWED_ORIGIN.split(',');
             if (!origin) {
                 return callback(null, true);
             }
@@ -40,6 +41,9 @@ var App = (function () {
         }));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(fileUpload({
+            limits: { fileSize: 5 * 1024 * 1024 }
+        }));
         this.app.use(express.static(path.resolve(global.appRoot, 'public')));
         this.mountRoutes();
         this.setupDB();

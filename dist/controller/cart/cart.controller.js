@@ -83,7 +83,7 @@ var CartController = (function () {
     };
     CartController.prototype.getUserCart = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var userId, userCart, e_1;
+            var userId, userCart, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -95,8 +95,30 @@ var CartController = (function () {
                         res.json(userCart);
                         return [3, 3];
                     case 2:
-                        e_1 = _a.sent();
-                        next(e_1);
+                        err_2 = _a.sent();
+                        next(err_2);
+                        return [3, 3];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    CartController.prototype.deleteCart = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var cartId, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        cartId = req.params.cartId;
+                        return [4, services_1.cartService.deleteCartById(cartId)];
+                    case 1:
+                        _a.sent();
+                        res.end();
+                        return [3, 3];
+                    case 2:
+                        err_3 = _a.sent();
+                        next(err_3);
                         return [3, 3];
                     case 3: return [2];
                 }

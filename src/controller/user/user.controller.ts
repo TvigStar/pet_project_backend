@@ -29,6 +29,7 @@ class UserController {
     const {_id, status,token=[]} = req.user as IUser;
     const tokenToDelete = req.get(RequestHeadersEnum.AUTHORIZATION);
 
+    console.log(status, _id, token)
     if (status !== UserStatus.PENDING) {
       throw new ErrorHandler(
         ResponseStatusCodesEnum.BAD_REQUEST,

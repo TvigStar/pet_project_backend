@@ -17,8 +17,7 @@ exports.ProductSchema = new mongoose_1.Schema({
         required: true
     },
     category: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
         type: Number,

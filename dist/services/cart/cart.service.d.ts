@@ -27,7 +27,7 @@ declare class CartService {
     findUserProceedCart(userId: Types.ObjectId): Promise<ICart>;
     updateCart(_id: Types.ObjectId, cartToUpdate: ICart): Promise<ICart | null>;
     getCartsByParams(findObject: Partial<ICart>): Promise<ICart[]>;
-    deleteCartById(_id: string): import("mongoose").Query<ICart & import("mongoose").Document<any, any, any> & {
+    deleteCartById(_id: Types.ObjectId | string): import("mongoose").Query<ICart & import("mongoose").Document<any, any, any> & {
         _id: any;
     }, ICart & import("mongoose").Document<any, any, any> & {
         _id: any;

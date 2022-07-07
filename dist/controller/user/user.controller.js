@@ -88,6 +88,7 @@ var UserController = (function () {
                     case 0:
                         _a = req.user, _id = _a._id, status = _a.status, _b = _a.token, token = _b === void 0 ? [] : _b;
                         tokenToDelete = req.get(constants_1.RequestHeadersEnum.AUTHORIZATION);
+                        console.log(status, _id, token);
                         if (status !== constants_1.UserStatus.PENDING) {
                             throw new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.BAD_REQUEST, errors_1.customErrors.BAD_REQUEST_USER_ACTIVATED.message, errors_1.customErrors.BAD_REQUEST_USER_ACTIVATED.customCode);
                         }

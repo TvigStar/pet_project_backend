@@ -50,7 +50,7 @@ class CartService {
     return CartModel.find(findObject).exec();
   }
 
-  deleteCartById(_id: string) {
+  deleteCartById(_id: Types.ObjectId | string) {
     return CartModel.findByIdAndRemove(_id);
   }
 

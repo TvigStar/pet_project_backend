@@ -25,8 +25,8 @@ declare class ProductService {
     createProduct(product: IProduct): Promise<IProduct & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
-    updateProductById(_id: Types.ObjectId, updateObject: Partial<IProduct>): Promise<IProduct | null>;
-    findProductById(productId: string): Promise<IProduct | null>;
+    updateProductById(_id: Types.ObjectId | IProduct, updateObject: Partial<IProduct>): Promise<IProduct | null>;
+    findProductById(productId: Types.ObjectId | IProduct | string): Promise<IProduct | null>;
     findAllProducts(product: IProduct): import("mongoose").Query<(IProduct & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[], IProduct & import("mongoose").Document<any, any, any> & {

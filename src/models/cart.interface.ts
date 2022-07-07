@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { IProduct } from './product.interface';
 
 export interface ICartProduct {
-  productId: Types.ObjectId | IProduct;
+  productId: Types.ObjectId | IProduct ;
   count: number;
   price: number;
 }

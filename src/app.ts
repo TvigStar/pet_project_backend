@@ -5,6 +5,7 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import * as morgan from 'morgan';
 import * as helmet from 'helmet';
+import fileUpload = require('express-fileupload');
 import * as path from 'path';
 import * as mongoose from 'mongoose';
 import { config } from './config';
@@ -34,6 +35,9 @@ class App {
 
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
+    this.app.use(fileUpload({
+      limits: { fileSize: 5 * 1024 * 1024 }
+    }));
 
     this.app.use(express.static(path.resolve((global as any).appRoot, 'public')));
     this.mountRoutes();
@@ -59,7 +63,7 @@ class App {
   }
 
   private configureCors = (origin: any, callback: any) => {
-    const whiteList = config.ALLOWED_ORIGIN;
+    const whiteList = config.ALLOWED_ORIGIN.split(',');
 
     if (!origin) {
       return callback(null, true);
@@ -74,7 +78,6 @@ class App {
 
   private mountRoutes(): void {
     this.app.use('/auth', authRouter);
-    // this.app.use('/admin', adminRouter);
     this.app.use('/products', productRouter);
     this.app.use('/users', userRouter);
     this.app.use('/cart', cartRouter);

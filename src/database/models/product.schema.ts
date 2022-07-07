@@ -18,8 +18,7 @@ export const ProductSchema: Schema = new Schema<IProduct>({
     required: true
   },
   category: {
-    type: String,
-    required: true
+    type: String
   },
   price: {
     type: Number,
