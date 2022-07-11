@@ -59,26 +59,29 @@ var ProductController = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 3, , 4]);
+                        _a.trys.push([0, 4, , 5]);
                         _id = req.user._id;
                         product = req.body;
-                        return [4, services_1.productService.createProduct(__assign(__assign({}, product), { userId: _id }))];
+                        return [4, req.file.sampleFile.mv(req.file.uploadPath)];
                     case 1:
+                        _a.sent();
+                        return [4, services_1.productService.createProduct(__assign(__assign({}, product), { userId: _id, photos: [req.file.uploadPath] }))];
+                    case 2:
                         newProduct = _a.sent();
                         return [4, services_1.logService.createLog({
                                 event: constants_1.LogsEnum.PRODUCT_CREATED,
                                 userId: _id,
                                 data: { productId: _id, title: newProduct.title }
                             })];
-                    case 2:
+                    case 3:
                         _a.sent();
                         res.json(newProduct);
-                        return [3, 4];
-                    case 3:
+                        return [3, 5];
+                    case 4:
                         err_1 = _a.sent();
                         next(err_1);
-                        return [3, 4];
-                    case 4: return [2];
+                        return [3, 5];
+                    case 5: return [2];
                 }
             });
         });

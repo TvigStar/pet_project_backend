@@ -38,28 +38,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkFileMiddleware = void 0;
 var checkFileMiddleware = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var files, _a, _b, err_1;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                req.product.photos = [];
-                _c.label = 1;
-            case 1:
-                _c.trys.push([1, 4, , 5]);
-                files = Object.values(req.files);
-                _b = (_a = console).log;
-                return [4, files];
-            case 2: return [4, _b.apply(_a, [_c.sent()])];
-            case 3:
-                _c.sent();
-                next();
-                return [3, 5];
-            case 4:
-                err_1 = _c.sent();
-                next(err_1);
-                return [3, 5];
-            case 5: return [2];
+    var sampleFile, uploadPath;
+    return __generator(this, function (_a) {
+        try {
+            if (!req.files || Object.keys(req.files).length === 0) {
+                return [2, res.status(400).send('No files were uploaded.')];
+            }
+            sampleFile = req.files.file;
+            uploadPath = process.cwd() + '/src/public/' + sampleFile.name;
+            req.file = { sampleFile: sampleFile, uploadPath: uploadPath };
+            next();
         }
+        catch (error) {
+            next(error);
+        }
+        return [2];
     });
 }); };
 exports.checkFileMiddleware = checkFileMiddleware;

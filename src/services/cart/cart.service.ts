@@ -13,7 +13,7 @@ class CartService {
 
   async addProductToCart(userCart: ICart, product: IProduct, productCount: number): Promise<ICart | null> {
     const productIndex = userCart.products.findIndex((value: ICartProduct) => {
-      return product._id.toString() === value.productId.toString();
+      return product._id.toString() === value.productId._id.toString();
     });
 
     if (productIndex !== -1) {

@@ -54,7 +54,7 @@ var CartService = (function () {
                 switch (_a.label) {
                     case 0:
                         productIndex = userCart.products.findIndex(function (value) {
-                            return product._id.toString() === value.productId.toString();
+                            return product._id.toString() === value.productId._id.toString();
                         });
                         if (productIndex !== -1) {
                             userCart.products[productIndex].count += productCount;

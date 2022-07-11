@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ICart, IProduct, IRequestExtended, IUser } from '../../models';
+import { IProduct, IRequestExtended, IUser } from '../../models';
 import { cartService, productService } from '../../services';
 import { customErrors, ErrorHandler } from '../../errors';
 import { ResponseStatusCodesEnum } from '../../constants';
@@ -50,7 +50,7 @@ class CartController {
     try {
       const {cartId}= req.params;
       await cartService.deleteCartById(cartId);
-      res.end()
+      res.end();
     } catch (err){
       next(err);
     }
