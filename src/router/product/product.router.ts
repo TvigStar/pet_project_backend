@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { productController } from '../../controller';
-import { checkAccessTokenMiddleware,
-  checkFileMiddleware
+import { checkAccessTokenMiddleware
+  // checkFileMiddleware
 } from '../../middlewares';
 import { newProductValidatorMiddleware } from '../../middlewares';
 
@@ -11,7 +11,7 @@ router.get('/', productController.getAllProduct);
 router.post('/create',
   checkAccessTokenMiddleware,
   newProductValidatorMiddleware ,
-  checkFileMiddleware,
+  // checkFileMiddleware,
   productController.createProduct);
 
 export const productRouter = router;

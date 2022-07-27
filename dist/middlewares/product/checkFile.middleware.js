@@ -37,22 +37,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkFileMiddleware = void 0;
+var uuid_1 = require("uuid");
+var fs = require("fs-extra");
+var path = require("path");
 var checkFileMiddleware = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var sampleFile, uploadPath;
+    var _id, dir, phDir, sampleFile, fileExtantion, fileName, uploadPath, error_1;
     return __generator(this, function (_a) {
-        try {
-            if (!req.files || Object.keys(req.files).length === 0) {
-                return [2, res.status(400).send('No files were uploaded.')];
-            }
-            sampleFile = req.files.file;
-            uploadPath = process.cwd() + '/src/public/' + sampleFile.name;
-            req.file = { sampleFile: sampleFile, uploadPath: uploadPath };
-            next();
+        switch (_a.label) {
+            case 0:
+                _id = req.user._id;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                if (!req.files || Object.keys(req.files).length === 0) {
+                    return [2, res.status(400).send('No files were uploaded.')];
+                }
+                dir = "".concat(_id, "/photo");
+                return [4, fs.mkdir(path.resolve(process.cwd(), 'src', 'public', dir), { recursive: true })];
+            case 2:
+                phDir = _a.sent();
+                console.log(phDir);
+                sampleFile = req.files.file;
+                fileExtantion = sampleFile.name.split('.').pop();
+                console.log(fileExtantion);
+                fileName = "".concat(uuid_1.v1, ".").concat(fileExtantion);
+                console.log(fileName);
+                uploadPath = phDir + sampleFile;
+                console.log(uploadPath);
+                req.file = { sampleFile: sampleFile, uploadPath: uploadPath };
+                next();
+                return [3, 4];
+            case 3:
+                error_1 = _a.sent();
+                next(error_1);
+                return [3, 4];
+            case 4: return [2];
         }
-        catch (error) {
-            next(error);
-        }
-        return [2];
     });
 }); };
 exports.checkFileMiddleware = checkFileMiddleware;

@@ -13,7 +13,6 @@ var mongoose = require("mongoose");
 var config_1 = require("./config");
 var router_1 = require("./router");
 var constants_1 = require("./constants");
-var cart_router_1 = require("./router/cart/cart.router");
 dotenv.config();
 var serverRequestLimit = (0, express_rate_limit_1.default)({
     windowMs: config_1.config.serverRateLimits.period,
@@ -66,7 +65,7 @@ var App = (function () {
         this.app.use('/auth', router_1.authRouter);
         this.app.use('/products', router_1.productRouter);
         this.app.use('/users', router_1.userRouter);
-        this.app.use('/cart', cart_router_1.cartRouter);
+        this.app.use('/cart', router_1.cartRouter);
         this.app.use('/checkout', router_1.checkoutRouter);
     };
     return App;

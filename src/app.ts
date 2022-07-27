@@ -9,9 +9,8 @@ import fileUpload = require('express-fileupload');
 import * as path from 'path';
 import * as mongoose from 'mongoose';
 import { config } from './config';
-import { authRouter, checkoutRouter, productRouter, userRouter } from './router';
+import { authRouter, cartRouter, checkoutRouter, productRouter, userRouter } from './router';
 import { ResponseStatusCodesEnum } from './constants';
-import { cartRouter } from './router/cart/cart.router';
 
 dotenv.config();
 

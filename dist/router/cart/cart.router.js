@@ -8,6 +8,7 @@ var router = (0, express_1.Router)();
 router.use(middlewares_1.checkAccessTokenMiddleware, middlewares_1.checkIsUserConfirmedMiddleware);
 router.get('/', controller_1.cartController.getUserCart);
 router.post('/products/:productId', middlewares_1.isProductExistsMiddleware, controller_1.cartController.addProductToCart);
-router.delete('/delete/:cartId', controller_1.cartController.deleteCart);
+router.patch('/products/:productId', controller_1.cartController.deleteProductFromCart);
+router.delete('/:cartId', controller_1.cartController.deleteCart);
 exports.cartRouter = router;
 //# sourceMappingURL=cart.router.js.map

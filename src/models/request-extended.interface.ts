@@ -7,5 +7,5 @@ export interface IRequestExtended extends Request{
   user?: IUser
   product?: IProduct
   cart?: ICart
-  file?:any
+  file?: any
 }

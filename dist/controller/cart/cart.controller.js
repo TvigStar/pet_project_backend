@@ -53,7 +53,7 @@ var CartController = (function () {
                         userId = req.user._id;
                         product = req.product;
                         count = req.body.count;
-                        if (product.stockCount < count) {
+                        if (product.stockCount < count && count > 0) {
                             return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.BAD_REQUEST, errors_1.customErrors.BAD_REQUEST_WRONG_PRODUCT_COUNT.message))];
                         }
                         return [4, services_1.cartService.findUserProceedCart(userId)];
@@ -81,9 +81,63 @@ var CartController = (function () {
             });
         });
     };
+    CartController.prototype.deleteProductFromCart = function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userId, count, productId_1, userCart, product, products, productIndex, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 5, , 6]);
+                        userId = req.user._id;
+                        count = req.body.count;
+                        productId_1 = req.params.productId;
+                        if (count <= 0) {
+                            console.log(count);
+                            return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.BAD_REQUEST, errors_1.customErrors.BAD_REQUEST_WRONG_PRODUCT_COUNT.message))];
+                        }
+                        return [4, services_1.cartService.findUserProceedCart(userId)];
+                    case 1:
+                        userCart = _a.sent();
+                        return [4, services_1.productService.findProductById(productId_1)];
+                    case 2:
+                        product = _a.sent();
+                        if (!userCart) {
+                            return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.NOT_FOUND, errors_1.customErrors.BAD_REQUEST_CART_NOT_FOUND.message))];
+                        }
+                        products = userCart.products;
+                        productIndex = userCart.products.findIndex(function (obj) { return obj.productId._id.equals(productId_1); });
+                        if (productIndex === -1 || count > products[productIndex].count) {
+                            return [2, next(new errors_1.ErrorHandler(constants_1.ResponseStatusCodesEnum.BAD_REQUEST, errors_1.customErrors.BAD_REQUEST_WRONG_PRODUCT_COUNT.message))];
+                        }
+                        if (count === products[productIndex].count) {
+                            products.splice(productIndex, 1);
+                        }
+                        else {
+                            products[productIndex].count -= count;
+                        }
+                        console.log(userCart.products);
+                        return [4, services_1.cartService.updateCart(userCart._id, userCart)];
+                    case 3:
+                        _a.sent();
+                        console.log(555);
+                        return [4, services_1.productService.updateProductById(product._id, { stockCount: product.stockCount + count })];
+                    case 4:
+                        _a.sent();
+                        res.json(userCart);
+                        return [3, 6];
+                    case 5:
+                        err_2 = _a.sent();
+                        console.log(err_2);
+                        next(err_2);
+                        return [3, 6];
+                    case 6: return [2];
+                }
+            });
+        });
+    };
     CartController.prototype.getUserCart = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var userId, userCart, err_2;
+            var userId, userCart, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -95,8 +149,8 @@ var CartController = (function () {
                         res.json(userCart);
                         return [3, 3];
                     case 2:
-                        err_2 = _a.sent();
-                        next(err_2);
+                        err_3 = _a.sent();
+                        next(err_3);
                         return [3, 3];
                     case 3: return [2];
                 }
@@ -105,7 +159,7 @@ var CartController = (function () {
     };
     CartController.prototype.deleteCart = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var cartId, err_3;
+            var cartId, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -117,8 +171,8 @@ var CartController = (function () {
                         res.end();
                         return [3, 3];
                     case 2:
-                        err_3 = _a.sent();
-                        next(err_3);
+                        err_4 = _a.sent();
+                        next(err_4);
                         return [3, 3];
                     case 3: return [2];
                 }

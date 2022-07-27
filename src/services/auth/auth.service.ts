@@ -19,7 +19,6 @@ class AuthService {
   findRefreshToken(refreshToken?: string ): Promise<IAccessToken | null> {
     return AccessTokenModel.findOne({refreshToken}).exec();
   }
-
   removeToken(removeObject: { accessToken?: string, refreshToken?: string }): Promise<IAccessToken | null> {
     return AccessTokenModel.findOneAndDelete(removeObject).exec();
   }
