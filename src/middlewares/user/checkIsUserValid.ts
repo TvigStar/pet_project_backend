@@ -1,6 +1,6 @@
-import {NextFunction, Request, Response} from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-import {newUserValidator} from '../../validators';
+import { newUserValidator } from '../../validators';
 
 export const checkIsUserValidMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const {error} = newUserValidator.validate(req.body);

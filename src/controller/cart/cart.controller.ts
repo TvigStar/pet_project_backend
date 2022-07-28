@@ -74,9 +74,8 @@ class CartController {
       } else {
         products[productIndex].count -= count;
       }
-      console.log(userCart.products);
+
       await cartService.updateCart(userCart._id, userCart);
-      console.log(555);
       await productService.updateProductById(product._id,
         {stockCount: product.stockCount + count});
       res.json(userCart);

@@ -15,7 +15,7 @@ router.get('/', cartController.getUserCart);
 router.post('/products/:productId', isProductExistsMiddleware,
   cartController.addProductToCart);
 
-router.patch('/products/:productId', cartController.deleteProductFromCart);
+router.patch('/products/:productId', isProductExistsMiddleware,cartController.deleteProductFromCart);
 
 router.delete('/:cartId', cartController.deleteCart);
 export const cartRouter = router;
